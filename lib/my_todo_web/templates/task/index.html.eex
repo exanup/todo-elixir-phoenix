@@ -1,3 +1,38 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Tasks
+      </h1>
+      <h2 class="subtitle">
+        All your todo items, in one place.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="mt-4 mb-4">
+  <div class="columns is-multiline">
+
+    <%= for {task, index} <- Enum.with_index(@tasks, 1) do %>
+
+      <div class="column is-4">
+        <article class="box">
+          <div class="title">
+          # <%= index %>
+          </div>
+          <div class="content">
+            <p><%= task.body %></p>
+          </div>
+        </article>
+      </div>
+
+    <% end %>
+
+  </div>
+</section>
+
+
 <h1>Listing Tasks</h1>
 
 <table>
