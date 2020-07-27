@@ -18,7 +18,9 @@ defmodule MyTodo.Tasks do
 
   """
   def list_tasks do
-    Repo.all(Task)
+    Task
+    |> order_by(asc: :inserted_at)
+    |> Repo.all()
   end
 
   @doc """
