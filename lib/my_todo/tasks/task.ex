@@ -11,9 +11,10 @@ defmodule MyTodo.Tasks.Task do
   end
 
   @doc false
-  def changeset(task, attrs) do
+  def changeset(task, attrs \\ %{}) do
     task
     |> cast(attrs, [:body, :is_favourite, :is_complete])
     |> validate_required([:body, :is_favourite, :is_complete])
+    |> validate_length(:body, min: 10)
   end
 end

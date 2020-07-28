@@ -19,6 +19,7 @@ defmodule MyTodo.Tasks do
   """
   def list_tasks do
     Task
+    |> order_by(desc: :is_favourite)
     |> order_by(asc: :inserted_at)
     |> Repo.all()
   end

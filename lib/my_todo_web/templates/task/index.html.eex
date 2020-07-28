@@ -11,48 +11,83 @@
   </div>
 </section>
 
-<section class="mt-4 mb-4">
+<section class="mt-4">
+  <%= if get_flash(@conn, :info) do %>
+    <div class="notification is-info is-light">
+      <button class="delete"></button>
+      <%= get_flash(@conn, :info) %>
+    </div>
+  <% end %>
+
+  <%= if get_flash(@conn, :success) do %>
+    <div class="notification is-success is-light">
+      <button class="delete"></button>
+      <%= get_flash(@conn, :success) %>
+    </div>
+  <% end %>
+
+  <%= if get_flash(@conn, :error) do %>
+    <div class="notification is-danger is-light">
+      <button class="delete"></button>
+      <%= get_flash(@conn, :error) %>
+    </div>
+  <% end %>
+
+</section>
+
+<section class="mt-4 mb-4 px-4">
 
     <%= for {task, index} <- Enum.with_index(@tasks, 1) do %>
+      <div class="field">
 
-      <label class="checkbox">
-        <input type="checkbox">
-          # <%= index %>
-      </label>
+        <%= link method: :delete,
+          to: Routes.task_path(@conn, :delete, task.id)
+        do %>
+          <span class="icon has-text-danger">
+            <ion-icon name="close-circle"></ion-icon>
+          </span>
+        <% end %>
 
+        <%= link method: :patch,
+          to: Routes.task_path(@conn, :update, task.id, task: %{is_favourite: !task.is_favourite})
+        do %>
+          <span class="icon has-text-danger">
+            <ion-icon name="<%= if task.is_favourite, do: "heart", else: "heart-outline" %>"></ion-icon>
+          </span>
+        <% end %>
+
+        <label class="checkbox">
+          <%= link method: :patch,
+           to: Routes.task_path(@conn, :update, task.id, task: %{is_complete: !task.is_complete})
+          do %>
+            <input type="checkbox" <%= if task.is_complete, do: "checked" %>>
+          <% end %>
+          <code>#<%= index %></code> <%= task.body %>
+        </label>
+      </div>
+    <% end %>
+
+    <%= form_for @changeset, Routes.task_path(@conn, :create), fn f -> %>
+
+      <div class="field mt-5">
+        <%= textarea f,
+          :body,
+          placeholder: "Do something",
+          rows: 2,
+          class: (
+            if @changeset.action && @changeset.errors[:body],
+              do: "textarea is-danger",
+              else: "textarea"
+            )
+        %>
+
+        <%= error_tag f, :body %>
+      </div>
+
+      <div class="field">
+        <%= submit "Add New Task", class: "button is-primary" %>
+      </div>
 
     <% end %>
 
 </section>
-
-
-<h1>Listing Tasks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>Is favourite</th>
-      <th>Is complete</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for task <- @tasks do %>
-    <tr>
-      <td><%= task.body %></td>
-      <td><%= task.is_favourite %></td>
-      <td><%= task.is_complete %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
-        <span><%= link "Edit", to: Routes.task_path(@conn, :edit, task) %></span>
-        <span><%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
