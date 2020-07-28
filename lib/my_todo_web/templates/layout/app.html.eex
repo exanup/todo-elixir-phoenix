@@ -14,9 +14,9 @@
       <section class="container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
-            <a class="navbar-item" href="https://phoenixframework.org/">
+            <%= link to: Routes.page_path(@conn, :index), class: "navbar-item" do %>
               <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" width="112" height="28">
-            </a>
+            <% end %>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
               <span aria-hidden="true"></span>
@@ -27,17 +27,13 @@
 
           <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-              <a class="navbar-item" href="https://hexdocs.pm/phoenix/overview.html">
-                Get Started
-              </a>
+
+              <%= link "Tasks", to: Routes.task_path(@conn, :index), class: "navbar-item" %>
 
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "navbar-item" %>
               <% end %>
 
-              <%= link "Home", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
-
-              <%= link "Tasks", to: Routes.task_path(@conn, :index), class: "navbar-item" %>
             </div>
           </div>
         </nav>
