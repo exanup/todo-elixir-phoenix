@@ -12,24 +12,17 @@
 </section>
 
 <section class="mt-4 mb-4">
-  <div class="columns is-multiline">
 
     <%= for {task, index} <- Enum.with_index(@tasks, 1) do %>
 
-      <div class="column is-4">
-        <article class="box">
-          <div class="title">
+      <label class="checkbox">
+        <input type="checkbox">
           # <%= index %>
-          </div>
-          <div class="content">
-            <p><%= task.body %></p>
-          </div>
-        </article>
-      </div>
+      </label>
+
 
     <% end %>
 
-  </div>
 </section>
 
 
