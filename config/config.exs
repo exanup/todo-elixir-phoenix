@@ -8,10 +8,12 @@
 use Mix.Config
 
 config :my_todo,
+  ssl: true,
   ecto_repos: [MyTodo.Repo]
 
 # Configures the endpoint
 config :my_todo, MyTodoWeb.Endpoint,
+  force_ssl: [rewrite_on: [:x_forwarded_proto], host: nil],
   url: [host: "localhost"],
   secret_key_base: "ZgiPkdkU2AZugeuRzdk/+RVwW4qLc7s2xm8Q5SL5iNe6Zj5OHvDRtssWP/afcS8E",
   render_errors: [view: MyTodoWeb.ErrorView, accepts: ~w(html json), layout: false],
