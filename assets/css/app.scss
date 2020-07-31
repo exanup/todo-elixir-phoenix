@@ -1,34 +1,20 @@
-/* This file is for your main application css. */
-
 @charset "utf-8";
-@import '../node_modules/bulma/bulma.sass';
-// @import './phoenix.css';
 
-// /* Alerts and form errors */
-// .alert {
-//   padding: 15px;
-//   margin-bottom: 20px;
-//   border: 1px solid transparent;
-//   border-radius: 4px;
-// }
-// .alert-info {
-//   color: #31708f;
-//   background-color: #d9edf7;
-//   border-color: #bce8f1;
-// }
-// .alert-warning {
-//   color: #8a6d3b;
-//   background-color: #fcf8e3;
-//   border-color: #faebcc;
-// }
-// .alert-danger {
-//   color: #a94442;
-//   background-color: #f2dede;
-//   border-color: #ebccd1;
-// }
-// .alert p {
-//   margin-bottom: 0;
-// }
-// .alert:empty {
-//   display: none;
-// }
+@import '~bulma/sass/utilities/_all';
+@import '~bulma/sass/base/_all';
+@import '~bulma/sass/helpers/_all';
+
+@import '~bulma/sass/elements/button';
+@import '~bulma/sass/elements/container';
+@import '~bulma/sass/elements/icon';
+@import '~bulma/sass/elements/notification';
+@import '~bulma/sass/elements/other';
+@import '~bulma/sass/elements/title';
+
+@import '~bulma/sass/form/shared';
+@import '~bulma/sass/form/checkbox-radio';
+@import '~bulma/sass/form/input-textarea';
+@import '~bulma/sass/form/tools';
+
+@import '~bulma/sass/components/navbar';
+@import '~bulma/sass/layout/hero';
